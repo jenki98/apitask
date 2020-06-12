@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fdb699b9-1c2d-477f-82d0-970879c0fd01" name="Default Changelist" comment="" />
+    <list default="true" id="fdb699b9-1c2d-477f-82d0-970879c0fd01" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +16,9 @@
         <option value="Python Script" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1dEigJ5C1jQoLBi14ZPTRHIOdKY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -39,9 +45,9 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="150" y="0" key="SettingsEditor" timestamp="1591996785949">
+    <state x="150" y="0" key="SettingsEditor" timestamp="1592005131656">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="150" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1591996785949" />
+    <state x="150" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1592005131656" />
   </component>
 </project>
