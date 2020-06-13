@@ -1,40 +1,44 @@
-import flask
+from flask import Flask, Response
 import requests
-from geopy import distance
+import geopy
+import json
+from geopy.distance import geodesic
 
-miles_dest = 0.0
-london = (51.509865, -0.118092)
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 app.config["DEBUG"] = True
-def get_data():
-    x = 2
 
 @app.route('/', methods=['GET'])
 def home():
     return "<h1> Main page </h1> <p> To get <a href = http://127.0.0.1:5000/user_loc>users</a></p>"
 
 
-@app.route('/user_loc', methods=['GET'])
+@app.route('/user_loc/', methods=['GET'])
 def get_users():
-    global miles_dest
-    r = requests.get("https://bpdts-test-app.herokuapp.com/users")
-    data = r.json()
-    users = {}
-    count = 1
-    for items in data:
-       #first_name = items["first_name"]
-      # last_name = items["last_name"]
-        user_id = items["id"]
-        latitude = items["latitude"]
-        longitude = items["longitude"]
-        other_location = (latitude, longitude)
-        miles_dest = int(distance.distance(london, other_location).miles)  # how to calcuate distance between two locations
-        if miles_dest <= 50:
-            user_string = str(items) +  str(miles_dest) + " miles " + str(user_id)
-            print(items)
-            users[count] = user_string
-        count += 1
-    return users
+    geolocator = geopy.MapQuest("iBPa7S0BFc8HgAEMwEouQ6J6w4BwmvD2")
+    location = geolocator.geocode("London")
+    london = (location.latitude, location.longitude)
+    r_users = requests.get("https://bpdts-test-app.herokuapp.com/users")
+    users_data = r_users.json()
+    r_city = requests.get("https://bpdts-test-app.herokuapp.com/city/London/users")
+    city_data = r_city.json()
+    cities = []
+    user = []
+    for city in city_data:
+        cities.append(city)
 
+    for users in users_data:
+        other_location = (users["latitude"], users["longitude"])
+        miles_dest = int(geodesic(london, other_location).miles)  # how to calcuate distance between two locations
+        if miles_dest <= 50:
+            user.append(users)
+    city_users_dict = {city_user['id']: city_user for city_user in cities}
+    all_users = [] + cities
+    for users in user:
+        if users['id'] in city_users_dict:
+            print("de-duping")
+        else:
+            all_users.append(users)
+
+    return Response(json.dumps(all_users))
 app.run()
