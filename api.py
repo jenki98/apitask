@@ -20,18 +20,19 @@ def get_users():
     global miles_dest
     r = requests.get("https://bpdts-test-app.herokuapp.com/users")
     data = r.json()
-    user_string = " "
     users = {}
-    count = 0
+    count = 1
     for items in data:
-        first_name = items["first_name"]
-        last_name = items["last_name"]
+       #first_name = items["first_name"]
+      # last_name = items["last_name"]
+        user_id = items["id"]
         latitude = items["latitude"]
         longitude = items["longitude"]
         other_location = (latitude, longitude)
         miles_dest = int(distance.distance(london, other_location).miles)  # how to calcuate distance between two locations
         if miles_dest <= 50:
-            user_string = first_name + " " + last_name + " - miles from London: " + str(miles_dest) + " miles"
+            user_string = str(items) +  str(miles_dest) + " miles " + str(user_id)
+            print(items)
             users[count] = user_string
         count += 1
     return users
