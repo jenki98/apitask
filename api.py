@@ -25,8 +25,8 @@ def get_users(city):
     #retrieve user data from API
     r_users = requests.get("{}/users".format(url))
     users_data = r_users.json()
-    r_city = requests.get("{}/city/{}/users".format(url, city))
-    city_users = r_city.json()
+    r_city_users = requests.get("{}/city/{}/users".format(url, city))
+    city_users = r_city_users.json()
     city_users_data = []
     users = []
 
