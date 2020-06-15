@@ -10,7 +10,7 @@ app.config["DEBUG"] = True
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1> Main page </h1> <p> To get <a href = http://127.0.0.1:5000/city/London/users>users</a></p>"
+    return "<h1>Techincal Task</h1> <p> To get <a href = http://127.0.0.1:5000/city/London/users>users in London or within 50 miles</a></p>"
 
 
 @app.route('/city/<city>/users', methods=['GET'])
@@ -29,21 +29,22 @@ def get_users(city):
     city_users = r_city.json()
     users = []
 
+#filter users based on distance from city
     for user in users_data:
         other_location = (user["latitude"], user["longitude"])
         miles_dest = float(geodesic(city_coord, other_location).miles)  # how to calcuate distance between two locations
         if miles_dest <= max_distance:
             users.append(user)
-    print(users)
+
     city_users_dict = {city_user['id']: city_user for city_user in city_users}
     all_users = [] + city_users
-    print(all_users)
+#remove duplicates by id
     for filtered_user in users:
         if filtered_user['id'] in city_users_dict:
-            print("de-duping")
+            print("Removing duplicates")
         else:
             all_users.append(filtered_user)
-    return Response(json.dumps(all_users), mimetype = "application/json")
+    return Response(json.dumps(all_users), mimetype="application/json")
 
 
 if __name__ == '__main__':
