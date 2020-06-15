@@ -13,7 +13,7 @@ This is an API which calls an API at https://bpdts-test-app.herokuapp.com and fi
 Dependencies
 ------------------
 
-This software requires an API key from Map Quest; you can register for one [here](https://www.mapquest.co.uk/). Once you have an API key, set the value known as `Consumer Key` in MapQuest as the environment variable `MAPQUEST_KEY`.
+This software requires an API key from Map Quest; you can register for one [here](https://developer.mapquest.com/). Once you have an API key, set the value known as `Consumer Key` in MapQuest as the environment variable `MAPQUEST_KEY`.
 
 This software is written in [Python 3](https://www.python.org/downloads/). You can use Pip to manage the dependencies. To install Pip, download from [here](https://bootstrap.pypa.io/get-pip.py), and then at the command line:
 
