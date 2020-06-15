@@ -22,33 +22,29 @@ def get_users(city):
     location = geolocator.geocode(city) #city from api parameter
     city_coord = (location.latitude, location.longitude) #city coordinates from Map Quest
 
-    #retrieve user data from API
+    #retrieve users from API
     r_users = requests.get("{}/users".format(url))
     users_data = r_users.json()
-    r_city_users = requests.get("{}/city/{}/users".format(url, city))
-    city_users = r_city_users.json()
-    city_users_data = []
+    r_city = requests.get("{}/city/{}/users".format(url, city))
+    city_users = r_city.json()
     users = []
 
-    for cities in city_users:
-        city_users_data.append(cities)
-
-    #filter results based on distance
     for user in users_data:
         other_location = (user["latitude"], user["longitude"])
         miles_dest = float(geodesic(city_coord, other_location).miles)  # how to calcuate distance between two locations
         if miles_dest <= max_distance:
             users.append(user)
-
-    city_users_dict = {city_user['id']: city_user for city_user in city_users_data}
-    all_users = [] + city_users_data
-
-    #removing duplicates
-    for user in users:
-        if user['id'] in city_users_dict:
-            print("removing duplicates")
+    print(users)
+    city_users_dict = {city_user['id']: city_user for city_user in city_users}
+    all_users = [] + city_users
+    print(all_users)
+    for filtered_user in users:
+        if filtered_user['id'] in city_users_dict:
+            print("de-duping")
         else:
-            all_users.append(users)
+            all_users.append(filtered_user)
+    return Response(json.dumps(all_users), mimetype = "application/json")
 
-    return Response(json.dumps(all_users))
-app.run()
+
+if __name__ == '__main__':
+    app.run()
