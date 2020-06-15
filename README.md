@@ -1,4 +1,4 @@
-This is an API which calls an API at  https://bpdts-test-app.herokuapp.com and filters users based on their location. It calls two requests, finding users by City ‘London’ and by co-ordinates that are within 50 miles of London obtaining the London co-ordinates and calculating the distance using Geopy and the MapQuest API. The API removes duplicates based on user Id and returns the list of users to the API interface in JSON format.
+This is an API which calls an API at https://bpdts-test-app.herokuapp.com and filters users based on their location. It calls two requests, finding users by City ‘London’ and by co-ordinates that are within 50 miles of London obtaining the London co-ordinates and calculating the distance using Geopy and the MapQuest API. The API removes duplicates based on user Id and returns the list of users to the API interface in JSON format.
 
 Installation:
 
